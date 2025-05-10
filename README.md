@@ -1,28 +1,25 @@
-String Reconstruction from Paired k-mers
+### String Reconstruction from Paired k-mers
+
 This repository provides a Python implementation for reconstructing a string from paired k-mers using Eulerian path. The algorithm constructs a directed graph from the paired k-mers, finds an Eulerian path, and reconstructs the string by traversing the graph.
 
-Overview
+### Overview
+
 Given a set of paired k-mers, the goal is to reconstruct the original string from these overlapping pairs. The algorithm works by:
-
 Constructing a directed graph from the paired k-mers.
-
 Finding an Eulerian path in the graph, which is a path that visits every edge exactly once.
-
 Reconstructing the string from the Eulerian path.
-
 The graph is represented as an adjacency list, and the Eulerian path is found using a depth-first search (DFS) approach. The algorithm handles the case where the graph might have an unbalanced number of in-degrees and out-degrees by selecting the appropriate starting node.
 
-Algorithm Steps
+### Algorithm Steps
 Construct the graph: Build a directed graph where each pair of k-mers defines an edge from the prefix of the first k-mer to the suffix of the second k-mer.
-
 Find the Eulerian path: Use DFS to find a path that visits every edge exactly once.
-
 Reconstruct the string: Traverse the Eulerian path to reconstruct the original string from the paired k-mers.
 
-Input Format
+### Input Format
 The input consists of a list of paired k-mers, where each pair is a tuple:
 ('prefix_kmer', 'suffix_kmer')
-Example
+
+### Example
 For the input:
 paired_kmers = [
     ('ACC', 'ATA'),
@@ -119,24 +116,23 @@ paired_kmers = [
 
 result = string_reconstruction_from_read_pairs(paired_kmers)
 print(result)
-Features
+
+### Features
 Graph Construction: Converts paired k-mers into a directed graph.
-
 Eulerian Path: Finds the Eulerian path using a depth-first search.
-
 String Reconstruction: Reconstructs the original string from the Eulerian path.
 
-Requirements
+### Requirements
 Python 3.x
 
-How to Use
+### How to Use
 Clone or download the repository.
 
 Run the script with your own set of paired k-mers to reconstruct the original string.
 
-Contribution
+### Contribution
 Feel free to fork the repository and submit pull requests if you'd like to contribute or improve the project.
 
-License
+### License
 This project is licensed under the MIT License.
 
