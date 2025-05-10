@@ -1,0 +1,72 @@
+from collections import defaultdict
+
+def string_reconstruction_from_read_pairs(paired_kmers):
+    def construct_graph(paired_kmers):
+        graph = defaultdict(list)
+        for pair in paired_kmers:
+            prefix, suffix = pair[0], pair[1]
+            graph[prefix].append(suffix)
+        return graph
+
+    def find_eulerian_path(graph, start_node):
+        path = []
+        stack = [start_node]
+
+        while stack:
+            current_node = stack[-1]
+
+            if graph[current_node]:
+                next_node = graph[current_node].pop()
+                stack.append(next_node)
+            else:
+                path.append(stack.pop())
+
+        return path[::-1]
+
+    graph = construct_graph(paired_kmers)
+
+    # Find a node with an indegree less than outdegree to start the path
+    start_node = None
+    for node in graph:
+        indegree = sum(len(graph[parent]) for parent in graph)
+        outdegree = len(graph[node])
+        if indegree < outdegree:
+            start_node = node
+            break
+
+    # If no such node is found, just pick any node as the start
+    if start_node is None:
+        start_node = list(graph.keys())[0]
+
+    eulerian_path = find_eulerian_path(graph, start_node)
+
+    # Reconstruct the string from the Eulerian path
+    reconstructed_string = eulerian_path[0]
+    for node in eulerian_path[1:]:
+        reconstructed_string += node[-1]
+
+    return reconstructed_string
+
+# Example usage:
+paired_kmers = [
+    ('ACC', 'ATA'),
+    ('ACT', 'ATT'),
+    ('ATA', 'TGA'),
+    ('ATT', 'TGA'),
+    ('CAC', 'GAT'),
+    ('CCG', 'TAC'),
+    ('CGA', 'ACT'),
+    ('CTG', 'AGC'),
+    ('CTG', 'TTC'),
+    ('GAA', 'CTT'),
+    ('GAT', 'CTG'),
+    ('GAT', 'CTG'),
+    ('TAC', 'GAT'),
+    ('TCT', 'AAG'),
+    ('TGA', 'GCT'),
+    ('TGA', 'TCT'),
+    ('TTC', 'GAA')
+]
+
+result = string_reconstruction_from_read_pairs(paired_kmers)
+print(result)
