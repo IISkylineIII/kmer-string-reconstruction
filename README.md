@@ -125,13 +125,6 @@ String Reconstruction: Reconstructs the original string from the Eulerian path.
 ### Requirements
 Python 3.x
 
-### How to Use
-Clone or download the repository.
-
-Run the script with your own set of paired k-mers to reconstruct the original string.
-
-### Contribution
-Feel free to fork the repository and submit pull requests if you'd like to contribute or improve the project.
 
 ### License
 This project is licensed under the MIT License.
